@@ -10,10 +10,6 @@ mappingId	cl_Authors
 target		:author/{wr_code}/ a :Author ; :name {wr_name} .
 source		select "wr_code", "wr_name" from "tb_affiliated_writers"
 
-mappingId	cl_Books
-target		:book/{bk_code}/ a :Book ; :title {bk_title} .
-source		select "bk_code", "bk_title" from "tb_books"
-
 mappingId	cl_Editors
 target		:editor/{ed_code}/ a :Editor ; :name {ed_name} .
 source		select "ed_code", "ed_name" from "tb_editor"
@@ -45,5 +41,14 @@ source		select "bk_code", "wr_id" from "tb_authors"
 mappingId	op_hasEdition
 target		:book/{bk_id}/ :hasEdition :edition/{ed_code}/ .
 source		select "ed_code", "bk_id" from "tb_edition"
+
+mappingId	cl_AudioBook-newmapping-EmergingWriter
+target		:book/{bk_code}/ a :EmergingWriter .
+source		select "bk_code", "bk_title" from "tb_books" where "bk_type"='A'
+
+mappingId	cl_EmergingWriter-newmapping-AudioBook
+target		:author/{wr_code}/ a :AudioBook ; :name {wr_name} .
+source		select "wr_code", "wr_name" from "tb_on_prob_wr"
+
 ]]
 
